@@ -1,0 +1,36 @@
+syntax="proto3";
+package grpcs;
+
+option go_package = "./protos";
+
+message ValidateTokenRequest {
+    string token = 1;
+}
+
+
+message ErrorResponse {
+  string message =1;
+  string system_message = 2;
+  int32  status_code =3;
+}
+
+message ValidateTokenResponse {
+    string email =1;
+    string username =2;
+    string name =3;
+    string token =4;
+    string role =5;
+    string id =6;
+}
+
+message Response {
+  int32 status_code=1;
+  ValidateTokenResponse data=2;
+  ErrorResponse error=3;
+}
+
+service OauthService {
+    rpc ValidateToken(ValidateTokenRequest) returns (Response){}
+}
+
+
